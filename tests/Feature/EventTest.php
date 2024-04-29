@@ -7,5 +7,5 @@ test('return all events', function () {
     $response = $this->get('/events');
 
     expect($response)->assertStatus(200);
-    expect(count($response))->toBe(3);
+    expect(count($response->json()))->toBe(3);
 });
