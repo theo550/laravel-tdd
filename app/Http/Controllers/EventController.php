@@ -33,4 +33,14 @@ class EventController extends Controller
 
         return response()->json(Event::all());
     }
+
+    public function update(Request $request)
+    {
+        $event = Event::find($request->id);
+
+        $event->name = $request->name;
+        $event->save();
+
+        return response()->json($event);
+    }
 }

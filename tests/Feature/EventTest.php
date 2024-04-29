@@ -35,3 +35,15 @@ test('delete_event', function () {
     expect($response)->assertStatus(200);
     expect(count(Event::all()))->toBe(0);
 });
+
+test('update_event', function () {
+    $event = Event::factory()->create();
+
+    $response = $this->put('/events', [
+        'id' => $event->id,
+        'name' => 'test'
+    ]);
+
+    expect($response)->assertStatus(200);
+    expect(Event::find($event->id)->name)->toBe('test');
+});
