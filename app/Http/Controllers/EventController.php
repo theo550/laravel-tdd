@@ -9,7 +9,7 @@ class EventController extends Controller
 {
     public function show()
     {
-        return Event::all();
+        return response()->json(Event::all());
     }
 
     public function store(Request $request)

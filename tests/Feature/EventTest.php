@@ -9,6 +9,16 @@ test('return_all_events', function () {
 
     expect($response)->assertStatus(200);
     expect(count($response->json()))->toBe(3);
+
+    expect(is_array($response->json()))->toBeTrue();
+
+    foreach ($response->json() as $event) {
+        expect(array_key_exists('id', $event))->toBeTrue();
+        expect(array_key_exists('name', $event))->toBeTrue();
+        expect(array_key_exists('date', $event))->toBeTrue();
+        expect(array_key_exists('address', $event))->toBeTrue();
+        expect(array_key_exists('city', $event))->toBeTrue();
+    }
 });
 
 test('create_new_event', function () {
