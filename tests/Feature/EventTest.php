@@ -33,5 +33,5 @@ test('delete_event', function () {
     ]);
 
     expect($response)->assertStatus(200);
-    expect(Event::all())->toBe(0);
+    expect(count(Event::all()))->toBe(0);
 });
