@@ -9,3 +9,11 @@ test('return all events', function () {
     expect($response)->assertStatus(200);
     expect(count($response->json()))->toBe(3);
 });
+
+test('create new event', function () {
+    $response = $this->post('/event');
+    $events = Event::all();
+
+    expect($response)->assertStatus(200);
+    expect(count($events->json()))->toBe(1);
+});
