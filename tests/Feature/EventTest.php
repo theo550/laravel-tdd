@@ -24,3 +24,14 @@ test('create_new_event', function () {
     expect(count($events))->toBe(1);
     expect($events[0]->name)->toBe('test');
 });
+
+test('delete_event', function () {
+    $event = Event::factory()->create();
+
+    $response = $this->delete('/events', [
+        'id' => $event->id
+    ]);
+
+    expect($response)->assertStatus(200);
+    expect(Event::all())->toBe(0);
+});
