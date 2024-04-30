@@ -11,4 +11,14 @@ class TypeController extends Controller
     {
         return response()->json(Type::all());
     }
+
+    public function store (Request $request)
+    {
+        $type = new Type();
+        $type->name = $request->name;
+
+        $type->save();
+
+        return response()->json(Type::all());
+    }
 }
