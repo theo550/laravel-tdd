@@ -19,6 +19,6 @@ class TypeController extends Controller
 
         $type->save();
 
-        return response()->json(Type::all());
+        return response()->json($type);
     }
 }

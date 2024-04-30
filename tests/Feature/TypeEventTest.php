@@ -17,6 +17,6 @@ test('create_new_type', function () {
     ]);
 
     expect($response)->assertStatus(200);
-    expect($response->json()[0]['name'])->toBe('test');
+    expect($response->json()['name'])->toBe('test');
     expect(Type::all()->toArray())->toHaveCount(1);
 });
