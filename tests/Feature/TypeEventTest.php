@@ -7,5 +7,5 @@ test('return_all_events_type', function () {
     $response = $this->get('/types');
 
     expect($response)->assertStatus(200);
-    expect(Type::all())->toBe(3);
+    expect(count($response->json()))->toBe(3);
 });
