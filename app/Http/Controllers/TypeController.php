@@ -29,4 +29,12 @@ class TypeController extends Controller
 
         return response()->json(Type::all());
     }
+
+    public function update (Request $request)
+    {
+        $type = Type::findOrFail($request->id);
+        $type->name = $request->name;
+
+        return response()->json($type);
+    }
 }

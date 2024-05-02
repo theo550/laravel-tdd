@@ -30,3 +30,14 @@ test('delete_type', function () {
     expect($response)->assertStatus(200);
     expect($response->json())->toHaveCount(0);
 });
+
+test('update_type', function () {
+    $type = Type::factory()->create();
+    $response = $this->put('/types', [
+        'id' => $type->id,
+        'name' => 'test'
+    ]);
+
+    expect($response)->assertStatus(200);
+    expect($response->json()["name"])->toBe('test');
+});
