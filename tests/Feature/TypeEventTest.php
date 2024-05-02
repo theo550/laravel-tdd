@@ -20,3 +20,13 @@ test('create_new_type', function () {
     expect($response->json()['name'])->toBe('test');
     expect(Type::all()->toArray())->toHaveCount(1);
 });
+
+test('delete_type', function () {
+    $type = Type::factory()->create();
+    $response = $this->delete('/types', [
+        'id' => $type->id
+    ]);
+
+    expect($response)->assertStatus(200);
+    expect($response->json())->toHaveCount(0);
+});

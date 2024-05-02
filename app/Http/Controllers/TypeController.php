@@ -21,4 +21,12 @@ class TypeController extends Controller
 
         return response()->json($type);
     }
+
+    public function delete (Request $request)
+    {
+        $type = Type::findOrFail($request->id);
+        $type->delete();
+
+        return response()->json(Type::all());
+    }
 }

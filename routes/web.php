@@ -15,3 +15,4 @@ Route::put('/events', [EventController::class, 'update']);
 
 Route::get('/types', [TypeController::class, 'show']);
 Route::post('/types', [TypeController::class, 'store']);
+Route::delete('/types', [TypeController::class, 'delete']);
