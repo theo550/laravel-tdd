@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Event;
+use App\Models\Type;
 use Carbon\Carbon;
 
 test('return_all_events', function () {
@@ -22,11 +23,14 @@ test('return_all_events', function () {
 });
 
 test('create_new_event', function () {
+    $types = Type::factory()->create();
+
     $response = $this->post('/events', [
         'name' => 'test',
         'date' => new Carbon('2024-04-29'),
         'address' => 'address',
         'city' => 'city',
+        'types_id' => $types->id
     ]);
     $events = Event::all();
 

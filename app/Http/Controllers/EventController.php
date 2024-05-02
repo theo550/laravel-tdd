@@ -19,6 +19,7 @@ class EventController extends Controller
         $event->date = $request->date;
         $event->address = $request->address;
         $event->city = $request->city;
+        $event->types_id = $request->types_id;
 
         $event->save();
 
