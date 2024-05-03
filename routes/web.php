@@ -21,12 +21,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/events', [EventController::class, 'show']);
+Route::get('/events', [EventController::class, 'index']);
 Route::post('/events', [EventController::class, 'store']);
 Route::delete('/events', [EventController::class, 'delete']);
 Route::put('/events', [EventController::class, 'update']);
 
 Route::get('event/city/{id}', [EventController::class, 'getEventbyCity']);
+Route::get('event/{id}', [EventController::class, 'show']);
 
 Route::get('/types', [TypeController::class, 'show']);
 Route::post('/types', [TypeController::class, 'store']);

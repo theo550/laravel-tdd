@@ -49,6 +49,16 @@ test('create_new_event', function () {
         ->types_id->toBe($types->id);
 });
 
+test('show one specific event by id', function () {
+    $event = Event::factory()->create();
+    $response = $this->get('/event/1');
+
+    expect($response)->assertStatus(200);
+    expect($response->json())
+        ->id->toBe(1)
+        ->name->toBe($event->name);
+});
+
 test('delete_event', function () {
     $event = Event::factory()->create();
 

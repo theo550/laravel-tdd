@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    public function show()
+    public function index()
     {
         return response()->json(Event::all());
+    }
+
+    public function show(int $id)
+    {
+        return response()->json(Event::findOrfail($id));
     }
 
     public function store(Request $request)
