@@ -5,6 +5,18 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
+Route::view('/', 'welcome');
+
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+
+require __DIR__.'/auth.php';
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,3 +34,4 @@ Route::delete('/types', [TypeController::class, 'delete']);
 Route::put('/types', [TypeController::class, 'update']);
 
 Route::get('/cities', [CityController::class, 'index']);
+
