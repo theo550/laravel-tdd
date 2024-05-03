@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\City;
 use App\Models\Type;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,7 +20,6 @@ class EventFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'city' => fake()->city(),
             'address' => fake()->streetAddress(),
             'date' => fake()->date(),
             'types_id' => Type::factory()->create()

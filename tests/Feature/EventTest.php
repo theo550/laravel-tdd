@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\City;
 use App\Models\Event;
 use App\Models\Type;
 use Carbon\Carbon;
@@ -18,25 +19,34 @@ test('return_all_events', function () {
         expect(array_key_exists('name', $event))->toBeTrue();
         expect(array_key_exists('date', $event))->toBeTrue();
         expect(array_key_exists('address', $event))->toBeTrue();
-        expect(array_key_exists('city', $event))->toBeTrue();
     }
+
+    expect($response->json()[0])
+        ->id->toBeInt()
+        ->name->toBeString()
+        ->date->toBeString()
+        ->address->toBeString();
 });
 
 test('create_new_event', function () {
+    $city = City::factory()->create();
     $types = Type::factory()->create();
 
     $response = $this->post('/events', [
         'name' => 'test',
         'date' => new Carbon('2024-04-29'),
         'address' => 'address',
-        'city' => 'city',
         'types_id' => $types->id
     ]);
     $events = Event::all();
 
     expect($response)->assertStatus(200);
     expect(count($events))->toBe(1);
-    expect($events[0]->name)->toBe('test');
+    expect($events[0])
+        ->name->toBe('test')
+        ->date->toBe('2024-04-29 00:00:00')
+        ->address->toBe('address')
+        ->types_id->toBe($types->id);
 });
 
 test('delete_event', function () {
@@ -60,4 +70,13 @@ test('update_event', function () {
 
     expect($response)->assertStatus(200);
     expect(Event::find($event->id)->name)->toBe('test');
+});
+
+test('return all event by city', function () {
+    $events = Event::factory()->count(10)->create();
+
+    $response = $this->get('/event/city/1');
+
+    // dd($response->json());
+    expect($response)->assertStatus(200);
 });

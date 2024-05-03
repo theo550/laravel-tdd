@@ -11,16 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('cities_events', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->date('date');
-            $table->string('address');
 
-            $table->unsignedBigInteger('types_id');
-            $table->foreign('types_id')
+            $table->unsignedBiginteger('cities_id')->unsigned();
+            $table->unsignedBiginteger('events_id')->unsigned();
+
+            $table->foreign('cities_id')
                 ->references('id')
-                ->on('types')
+                ->on('cities')
+                ->onDelete('cascade');
+
+            $table->foreign('events_id')
+                ->references('id')
+                ->on('events')
                 ->onDelete('cascade');
 
             $table->timestamps();
@@ -32,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('cities_events');
     }
 };

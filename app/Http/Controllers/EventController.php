@@ -18,8 +18,9 @@ class EventController extends Controller
         $event->name = $request->name;
         $event->date = $request->date;
         $event->address = $request->address;
-        $event->city = $request->city;
         $event->types_id = $request->types_id;
+
+        $event->cities()->attach($request->cities_id);
 
         $event->save();
 
@@ -43,5 +44,13 @@ class EventController extends Controller
         $event->save();
 
         return response()->json($event);
+    }
+
+    public function getEventByCity (int $id)
+    {
+        $events = Event::with('cities')
+            ->where('cities', '=', $id)
+            ->get();
+        return response()->json($events);
     }
 }

@@ -14,6 +14,8 @@ Route::post('/events', [EventController::class, 'store']);
 Route::delete('/events', [EventController::class, 'delete']);
 Route::put('/events', [EventController::class, 'update']);
 
+Route::get('event/city/{id}', [EventController::class, 'getEventbyCity']);
+
 Route::get('/types', [TypeController::class, 'show']);
 Route::post('/types', [TypeController::class, 'store']);
 Route::delete('/types', [TypeController::class, 'delete']);
